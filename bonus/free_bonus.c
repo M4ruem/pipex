@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:02 by cormiere          #+#    #+#             */
-/*   Updated: 2023/01/10 10:09:32 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:05:56 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	parent_free(t_ppxb *pipex)
 
 	i = 0;
 	close(pipex->infile);
-	close(pipex->outfile);
+	if (pipex->outfile != -1)
+		close(pipex->outfile);
 	if (pipex->here_doc)
 		unlink(".heredoc_tmp");
 	while (pipex->cmd_paths[i])
@@ -48,7 +49,8 @@ void	child_free(t_ppxb *pipex)
 void	pipe_free(t_ppxb *pipex)
 {
 	close(pipex->infile);
-	close(pipex->outfile);
+	if (pipex->outfile != -1)
+		close(pipex->outfile);
 	if (pipex->here_doc)
 		unlink(".heredoc_tmp");
 	free(pipex->pipe);

@@ -6,7 +6,7 @@
 /*   By: cormiere <cormiere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:04:54 by cormiere          #+#    #+#             */
-/*   Updated: 2023/01/10 16:10:58 by cormiere         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:21:05 by cormiere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	maxchild(t_ppxb p, char **argv, char **envp, int i)
 			if (p.outfile < 0)
 			{
 				msg_error(ERR_OUTFILE);
+				parent_free(&p);
 				exit (1);
 			}
 			sub_dup2(p.pipe[2 * p.idx - 2], p.outfile);
